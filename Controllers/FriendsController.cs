@@ -22,9 +22,9 @@ namespace MvcFriends.Controllers
         // GET: Friends
         public async Task<IActionResult> Index()
         {
-              return _context.Friends != null ? 
-                          View(await _context.Friends.ToListAsync()) :
-                          Problem("Entity set 'DatabaseContext.Friends'  is null.");
+            return _context.Friends != null ?
+                        View(await _context.Friends.ToListAsync()) :
+                        Problem("Entity set 'DatabaseContext.Friends'  is null.");
         }
 
         // GET: Friends/Details/5
@@ -47,6 +47,11 @@ namespace MvcFriends.Controllers
 
         // GET: Friends/Create
         public IActionResult Create()
+        {
+            return View();
+        }
+
+        public IActionResult ViewTest()
         {
             return View();
         }
@@ -150,14 +155,14 @@ namespace MvcFriends.Controllers
             {
                 _context.Friends.Remove(friend);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool FriendExists(int id)
         {
-          return (_context.Friends?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Friends?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
